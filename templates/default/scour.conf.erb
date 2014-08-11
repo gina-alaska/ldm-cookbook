@@ -1,0 +1,9 @@
+# scour.conf
+#
+# This file is managed by Chef
+# Changes to this file will be overwritten
+
+# Directory			Days-old	Optional-filename-pattern
+<% @directories.each do |dir| %>
+<%= dir['directory'] %>  <%= dir['days'] %>  <%= dir['pattern'] %>
+<% end %>

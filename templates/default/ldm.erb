@@ -1,0 +1,27 @@
+#!/bin/bash
+# MM20131010 first go at init script for ldm
+###
+# chkconfig: 2345 99 1
+# description: Manages UniData LDM server
+###
+
+LDMUSER=<%= @user %>
+LDMADM=<%= @ldmadmin %>
+
+case "$1" in
+	start|stop|restart)
+		echo "${1}ing ldm "
+		/bin/su - $LDMUSER -c "$LDMADM $1"
+		;;
+	status)
+		echo -n "checking status of ldm: "
+		/bin/su - $LDMUSER -c "$LDMADM isrunning" && echo "running" || echo "not running"
+		;;
+	*)
+		echo "Usage: $0 <start|stop|restart|status>"
+		exit 1
+		;;
+esac
+
+exit 0
+

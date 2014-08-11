@@ -1,0 +1,16 @@
+# netcheck.conf
+#
+# This file is managed by Chef
+# Changes to this file will be overwritten
+
+<% @upstreams.each do |upstream| %>
+upstream:<%=upstream%>
+<% end %>
+
+<% @downstreams.each do |downstream| %>
+downstream:<%=downstream%>
+<% end %>
+
+<% @mailnames.each do |mailname| %>
+mailname:<%=mailname%>
+<% end %>

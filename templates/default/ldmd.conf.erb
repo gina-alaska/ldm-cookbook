@@ -1,0 +1,36 @@
+# ldmd.conf
+#
+# This file is managed by Chef
+# Changes to this file will be overwritten
+
+<% @includes.each do |inc| %>
+INCLUDE <%= inc %>
+<% end %>
+
+EXEC	"pqact"
+<% if node['ldm']['send_to_ucar'] %>
+EXEC	"rtstats -h rtstats.unidata.ucar.edu"
+<% end %>
+
+<% @execs.each do |ex| %>
+EXEC <%=ex%>
+<% end %>
+
+<% @requests.each do |request| %>
+<% host = [request['host'], request['port']].join(":") %>
+REQUEST <%=[request['feedset'], request['pattern'], host].join("\t") %>
+<% end %>
+
+
+ALLOW	ANY	^((localhost|loopback)|(127\.0\.0\.1\.?$))
+<% if node['ldm']['send_to_ucar'] %>
+ALLOW	ANY	^[a-z].*\.unidata\.ucar\.edu\.?$
+<% end %>
+
+<% @allows.each do |allow| %>
+ALLOW <%= [allow['feedset'], allow['hostname'], allow['ok'], allow['not']].compact.join("\t") %>
+<%- end %>
+
+<% @accepts.each do |accept| %>
+ACCEPT <%= [accept['feedset'], accept['pattern'], accept['hostname']].compact.join("\t") %>
+<% end %>

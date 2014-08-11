@@ -1,0 +1,8 @@
+# pcact.conf
+#
+# This file is managed by Chef
+# Changes to this file will be overwritten
+
+<% @entries.each do |entry| %>
+<%= [entry['feedtype'], entry['action'], entry['options'], entry['action_args']].compact.join("\t") %>
+<% end %>
