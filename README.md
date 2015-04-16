@@ -1,5 +1,3 @@
-#  This cookbook is under development, documentation may be incorrect as we work towards 1.0
-
 # ldm cookbook
 
 * Installs ldm from source code
@@ -81,16 +79,3 @@ sample attribute from node json:
 
 Scott Macfarlane
 Author:: Scott Macfarlane (<scott@gina.alaska.edu>)
-
-
-# Requirements
-
-# Usage
-
-# Attributes
-
-# Recipes
-
-# Author
-
-Author:: YOUR_NAME (<YOUR_EMAIL>)
