@@ -17,7 +17,7 @@ EXEC <%=ex%>
 <% end %>
 
 <% @requests.each do |request| %>
-<% host = [request['host'], request['port']].join(":") %>
+<% host = [request['host'], request['port']].compact.join(":") %>
 REQUEST <%=[request['feedset'], request['pattern'], host].join("\t") %>
 <% end %>
 
