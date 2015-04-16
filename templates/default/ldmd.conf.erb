@@ -19,7 +19,7 @@
 # The REQUEST and ACCEPT entries both have product-ID patterns that are regular
 # expressions (RE-s).  It is EXTREMELY IMPORTANT that these patterns not have a
 # ".*" prefix because: 1) such a prefix accomplishes nothing (i.e., the set of
-# possible matches is unaltered by the prefix); and 2) such a prefix causes the 
+# possible matches is unaltered by the prefix); and 2) such a prefix causes the
 # RE to take MUCH, MUCH LONGER TO EXECUTE (by 3 orders of magnitude in some
 # cases).  Therefore, DO NOT USE RE-s like
 #
@@ -90,7 +90,7 @@ EXEC	"rtstats -h rtstats.unidata.ucar.edu"
 #REQUEST WMO ".*" another-secondary-host.yet_another.domain:3152
 
 <%- @requests.each do |request| %>
-REQUEST <%=request['feedset']%> <%=request['pattern']%> <%=request['host']%><%=":#{request['port']}" if request['port']%>
+REQUEST <%=request['feedset']%> "<%=request['pattern']%>" <%=request['host']%><%=":#{request['port']}" if request['port']%>
 <%- end %>
 #
 ###############################################################################
@@ -153,5 +153,5 @@ ACCEPT <%= accept['feedset'] %> <%= accept['pattern']%> <%= accept['hostname'] %
 
 #
 ###############################################################################
-# End 
+# End
 ###############################################################################
