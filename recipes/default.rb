@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright (C) 2013 Scott Macfarlane
-# 
+#
 # All rights reserved - Do Not Redistribute
 #
 
@@ -13,8 +13,7 @@ node['ldm']['packages'].each do |pkg|
   end
 end
 
-user node['ldm']['user']
-
+include_recipe "ldm::_user"
 include_recipe "ldm::#{node['ldm']['install_type']}"
 
 template "#{node['ldm']['install_dir']}/etc/ldmd.conf" do
@@ -23,8 +22,8 @@ template "#{node['ldm']['install_dir']}/etc/ldmd.conf" do
   group 'ldm'
   mode 0644
   variables({
-    accepts: node['ldm']['accepts'], 
-    allows: node['ldm']['allows'], 
+    accepts: node['ldm']['accepts'],
+    allows: node['ldm']['allows'],
     requests: node['ldm']['requests']
   })
 end
@@ -35,7 +34,7 @@ template "#{node['ldm']['install_dir']}/etc/scour.conf" do
   group 'ldm'
   mode 0644
   variables({
-    scours: node['ldm']['scours'] 
+    scours: node['ldm']['scours']
   })
 end
 
@@ -45,7 +44,7 @@ template "#{node['ldm']['install_dir']}/etc/pqact.conf" do
   group 'ldm'
   mode 0644
   variables({
-    pqacts: node['ldm']['pqacts'] 
+    pqacts: node['ldm']['pqacts']
   })
 end
 

@@ -1,11 +1,10 @@
-default['ldm']['source'] = "ftp://ftp.unidata.ucar.edu/pub/ldm/ldm-6.11.6.tar.gz"
-default['ldm']['version'] = "6.11.6"
-default['ldm']['checksum'] = "43dab2a5b6072cd71f66c1d9708fc03d05c3e0db213d38d1b952c90037b14e55"
+default['ldm']['source'] = "ftp://ftp.unidata.ucar.edu/pub/ldm/ldm-6.12.9.tar.gz"
+default['ldm']['checksum'] = "eccb66a5e86a6d43cabde28e048e70053374c53b85cebd37233920ae5d8c28d5"
 default['ldm']['install_type'] = 'source'
 default['ldm']['install_dir'] = '/opt/ldm'
 default['ldm']['user'] = 'ldm'
 
-#Build options 
+#Build options
 # -- See http://www.unidata.ucar.edu/software/ldm/ldm-6.11.6/basics/source-install-steps.html
 # --   for available autoconf and build flags
 default['ldm']['build_env'] = {
@@ -33,5 +32,5 @@ default['ldm']['scours'] = Array.new
 #LDM Configuration - pqact.conf
 default['ldm']['pqacts'] = Array.new
 
-#cronjob Configuration 
+#cronjob Configuration
 default['ldm']['cronjobs'] = Array.new
