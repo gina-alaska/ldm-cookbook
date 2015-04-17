@@ -49,7 +49,10 @@ template "#{node['ldm']['install_dir']}/etc/pqact.conf" do
 end
 
 file "/etc/profile.d/ldm.sh" do
-  content "export PATH=#{node['ldm']['install_dir']}/bin:$PATH"
+  content <<-EOL.gsub(/^\W+/, '')
+    export PATH=#{node['ldm']['install_dir']}/bin:$PATH
+    export LDMHOME=#{node['ldm']['install_dir']}
+  EOL
   mode 0644
 end
 
