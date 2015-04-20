@@ -3,6 +3,7 @@ default['ldm']['checksum'] = "eccb66a5e86a6d43cabde28e048e70053374c53b85cebd3723
 default['ldm']['install_type'] = 'source'
 default['ldm']['install_dir'] = '/opt/ldm'
 default['ldm']['user'] = 'ldm'
+default['ldm']['global_queue'] = false
 
 #Build options
 # -- See http://www.unidata.ucar.edu/software/ldm/ldm-6.11.6/basics/source-install-steps.html
