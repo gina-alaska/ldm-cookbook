@@ -86,16 +86,13 @@ node['ldm']['cronjobs'].each do |cj|
   end
 end
 
+
 #Only run this on first installation
 execute "create_ldm_queue" do
   environment({"PATH" => "#{node['ldm']['install_dir']}/bin:/usr/bin:$PATH"}) if node['ldm']['install_dir']
-  command "#{node['ldm']['install_dir']}/bin/ldmadmin mkqueue"
+  command "#{node['ldm']['install_dir']}/bin/ldmadmin mkqueue -f > /tmp/ldm_test"
   user "ldm"
   group "ldm"
   not_if { system("#{node['ldm']['install_dir']}/bin/pqcheck") }
 end
 
-file "#{node['ldm']['install_dir']}/var/queues/ldm.pq" do
-  mode 0666
-  only_if { node['ldm']['global_queue'] }
-end
