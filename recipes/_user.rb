@@ -6,7 +6,7 @@ end
 
 user_account 'ldm' do
   gid 'ldm'
-  home node['ldm']['install-dir']
+  home node['ldm']['install_dir']
   comment 'Sandy LDM'
   ssh_keys account['ssh_keys']
   ssh_keygen false
