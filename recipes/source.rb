@@ -1,4 +1,5 @@
-include_recipe "build-essential"
+
+package 'gcc'
 
 directory node['ldm']['install_dir'] do
   user 'ldm'
