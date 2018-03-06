@@ -5,6 +5,9 @@ driver:
 
 provisioner:
   name: chef_solo
+  
+verifier:
+  name: inspec
 
 platforms:
   - name: centos-7
@@ -14,3 +17,6 @@ suites:
     run_list:
       - recipe[ldm::default]
     attributes:
+    verifier:
+      inspec_tests:
+        - test/smoke/default
