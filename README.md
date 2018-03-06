@@ -7,9 +7,7 @@
 # Requirements
 
 * chef
-* cookbook 'minitest-handler'
-* cookbook 'build-essential'
-* RHEL/CentOS 6
+* CentOS 6 or Centos 7
 
 # Usage
 
@@ -79,3 +77,5 @@ sample attribute from node json:
 
 Scott Macfarlane
 Author:: Scott Macfarlane (<scott@gina.alaska.edu>)
+
+and UAF-GINA 
