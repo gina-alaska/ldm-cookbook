@@ -1,6 +1,4 @@
-source 'https://api.berkshelf.com'
-
-cookbook 'build-essential'
-cookbook 'user'
+source 'https://supermarket.chef.io'
+source :chef_server
 
 metadata
