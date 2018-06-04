@@ -35,3 +35,7 @@ default['ldm']['pqacts'] = Array.new
 
 #cronjob Configuration
 default['ldm']['cronjobs'] = Array.new
+
+#start and enable ldm if true. Defaults to true to maintain compatibility
+default['ldm']['auto-start'] = true
+

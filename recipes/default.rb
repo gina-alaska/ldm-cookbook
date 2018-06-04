@@ -68,8 +68,10 @@ template "/etc/init.d/ldm" do
   })
 end
 
-service "ldm" do
-  action [ :enable, :start ]
+if node['ldm']['auto-start'] then 
+  service "ldm" do
+    action [ :enable, :start ]
+  end
 end
 
 # setup some cronjobs
