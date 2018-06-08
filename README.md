@@ -11,6 +11,8 @@
 
 # Usage
 
+* to stop the ldm from being started set `node['ldm']['auto-start'] = false`
+
 # Attributes
 sample attribute from node json:
 ```
