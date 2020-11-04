@@ -13,7 +13,7 @@ node['ldm']['packages'].each do |pkg|
   end
 end
 
-include_recipe "ldm::_user"
+include_recipe 'ldm::_user'
 include_recipe "ldm::#{node['ldm']['install_type']}"
 
 template "#{node['ldm']['install_dir']}/etc/ldmd.conf" do
@@ -26,10 +26,11 @@ template "#{node['ldm']['install_dir']}/etc/ldmd.conf" do
     allows: node['ldm']['allows'],
     requests: node['ldm']['requests']
   })
+  not_if { ::File.exist?("#{node['ldm']['install_dir']}/etc/ldmd.conf") && node['ldm']['overwrite_ldmd_conf'] == false }
 end
 
 template "#{node['ldm']['install_dir']}/etc/scour.conf" do
-  source "scour.conf.erb"
+  source 'scour.conf.erb'
   owner 'ldm'
   group 'ldm'
   mode 0644
@@ -39,13 +40,14 @@ template "#{node['ldm']['install_dir']}/etc/scour.conf" do
 end
 
 template "#{node['ldm']['install_dir']}/etc/pqact.conf" do
-  source "pqact.conf.erb"
+  source 'pqact.conf.erb'
   owner 'ldm'
   group 'ldm'
   mode 0644
   variables({
     pqacts: node['ldm']['pqacts']
   })
+  not_if { ::File.exist?("#{node['ldm']['install_dir']}/etc/pqact.conf") && node['ldm']['overwrite_pqact_conf'] == false }
 end
 
 file "/etc/profile.d/ldm.sh" do
@@ -56,8 +58,8 @@ file "/etc/profile.d/ldm.sh" do
   mode 0644
 end
 
-template "/etc/init.d/ldm" do
-  source "ldm.erb"
+template '/etc/init.d/ldm' do
+  source 'ldm.erb'
   owner 'root'
   group 'root'
   mode 0755
@@ -68,8 +70,8 @@ template "/etc/init.d/ldm" do
   })
 end
 
-if node['ldm']['auto-start'] then 
-  service "ldm" do
+if node['ldm']['auto-start'] then
+  service 'ldm' do
     action [ :enable, :start ]
   end
 end
@@ -89,7 +91,7 @@ node['ldm']['cronjobs'].each do |cj|
 end
 
 #Only run this on first installation
-execute "create_ldm_queue" do
+execute 'create_ldm_queue' do
   environment({"PATH" => "#{node['ldm']['install_dir']}/bin:/usr/bin:$PATH"}) if node['ldm']['install_dir']
   command "#{node['ldm']['install_dir']}/bin/ldmadmin mkqueue"
   user "ldm"
