@@ -7,7 +7,7 @@
 # Requirements
 
 * chef
-* CentOS 6 or Centos 7
+* RHEL 8 and 9
 
 # Usage
 

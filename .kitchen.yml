@@ -2,16 +2,28 @@
 driver:
   name: vagrant
   vm_hostname: ldm.local
-
+ 
 provisioner:
-  name: chef_solo
-  
-verifier:
-  name: inspec
+  name: chef_zero
+  product_name: cinc
+  download_url: https://omnitruck.cinc.sh/install.sh
+
+  #verifier:
+  #name: inspec
 
 platforms:
-  - name: centos-6
-  - name: centos-7
+  - name: bento/rockylinux-9
+    config:
+    disksize:
+      size='100GB'
+    attributes:
+      firewall:
+        allow_ssh: true
+        #    driver_config:
+        #password: vagrant
+        #transport:
+        #username: vagrant
+        #password: vagrant
 
 suites:
   - name: default

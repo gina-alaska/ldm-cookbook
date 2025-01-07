@@ -1,5 +1,5 @@
-default['ldm']['source'] = 'ftp://ftp.unidata.ucar.edu/pub/ldm/ldm-6.13.6.tar.gz'
-default['ldm']['checksum'] = 'f271bc2c6a02c28f74d1c8c179157d52c6ac39fc3a2b55d74c5030923fe2d54b'
+default['ldm']['source'] = 'https://downloads.unidata.ucar.edu/ldm/6.13.16/ldm-6.13.16.tar.gz'
+default['ldm']['checksum'] = '9c50f95e5e35c147be28ffffb6ca2ada0d27e624236f3be335eb290c83ac5daf'
 
 default['ldm']['install_type'] = 'source'
 default['ldm']['install_dir'] = '/opt/ldm'
