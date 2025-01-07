@@ -42,6 +42,7 @@ bash 'build_ldm' do
   code <<-EOH
     ./configure --disable-root-actions --disable-static --prefix=#{node['ldm']['install_dir']}
     make install
+    sed -i 's/@LDM_PORT@/388/g' #{node['ldm']['install_dir']}/etc/registry.xml
   EOH
   notifies :run, "bash[run_ldm_root_actions]", :immediately
 end

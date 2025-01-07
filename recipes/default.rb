@@ -58,23 +58,17 @@ file "/etc/profile.d/ldm.sh" do
   mode 0644
 end
 
-template '/etc/init.d/ldm' do
-  source 'ldm.erb'
-  owner 'root'
-  group 'root'
-  mode 0755
-  variables({
-    user: node['ldm']['user'],
-    ldmadmin: "#{node['ldm']['install_dir']}/bin/ldmadmin",
-    pidfile: "#{node['ldm']['install_dir']}/ldmd.pid",
-  })
-end
-
-if node['ldm']['auto-start'] then
-  service 'ldm' do
-    action [ :enable, :start ]
-  end
-end
+#template '/etc/init.d/ldm' do
+#  source 'ldm.erb'
+#  owner 'root'
+#  group 'root'
+#  mode 0755
+#  variables({
+#    user: node['ldm']['user'],
+#    ldmadmin: "#{node['ldm']['install_dir']}/bin/ldmadmin",
+#    pidfile: "#{node['ldm']['install_dir']}/ldmd.pid",
+#  })
+#end
 
 # setup some cronjobs
 node['ldm']['cronjobs'].each do |cj|
@@ -103,3 +97,33 @@ file "#{node['ldm']['install_dir']}/var/queues/ldm.pq" do
   mode 0666
   only_if { node['ldm']['global_queue'] }
 end
+
+
+
+systemd_unit 'ldm.service' do
+  content({ Unit: {
+            Description: 'Unidata Local Data Manager',
+            After: 'network.target',
+          },
+	    Service: {
+		Type: 'forking',
+ 		ExecStartPre: "#{node['ldm']['install_dir']}//bin/ldmadmin delqueue",
+ 		ExecStartPre: "#{node['ldm']['install_dir']}//bin/ldmadmin mkqueue",
+ 		ExecStart: "#{node['ldm']['install_dir']}/bin/ldmadmin start -p 388 ",
+ 		ExecStop: "#{node['ldm']['install_dir']}/bin/ldmadmin stop",
+ 		PIDFile: "#{node['ldm']['install_dir']}/ldmd.pid",
+ 		Restart: 'on-failure',
+ 		SuccessExitStatus: '1',
+ 		User: 'ldm'
+          }})
+  action [:create, :enable, :start]
+end
+
+
+
+if node['ldm']['auto-start'] then
+  service 'ldm' do
+    action [ :enable, :start ]
+  end
+end
+
